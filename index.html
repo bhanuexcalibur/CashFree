@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bhanu Kumar &times; Cashfree &middot; Proof of Work</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg:    #08090c;
+  --bg2:   #0e1014;
+  --bg3:   #14161c;
+  --bg4:   #1a1c24;
+  --bg5:   #22252f;
+  --bdr:   rgba(255,255,255,0.07);
+  --bmd:   rgba(255,255,255,0.13);
+  --blg:   rgba(255,255,255,0.22);
+  --t1:    #edecea;
+  --t2:    #9a9896;
+  --t3:    #56534c;
+  --cf:    #00c389;
+  --cfdim: rgba(0,195,137,0.1);
+  --cfglow:rgba(0,195,137,0.2);
+  --cft:   #2dd4a0;
+  --grn:   #00c389;
+  --gdim:  rgba(0,195,137,0.09);
+  --gt:    #2dd4a0;
+  --red:   #e05050;
+  --rddim: rgba(224,80,80,0.09);
+  --rdt:   #f07070;
+  --amb:   #f0a500;
+  --adim:  rgba(240,165,0,0.09);
+  --at:    #f5bc3c;
+  --radius:16px;
+  --radius-lg:20px;
+}
+
+html{scroll-behavior:smooth;scroll-padding-top:66px;}
+body{
+  background:var(--bg);color:var(--t1);
+  font-family:'DM Sans',sans-serif;font-size:16px;
+  line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+
+/* ── READING BAR ── */
+.rbar{
+  position:fixed;top:0;left:0;height:2px;
+  background:var(--cf);z-index:500;transition:width 0.08s linear;width:0%;
+}
+
+/* ── NAV ── */
+.nav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(8,9,12,0.94);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--bdr);padding:0 5vw;
+}
+.nav-i{
+  max-width:1140px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  height:58px;gap:16px;flex-wrap:nowrap;
+}
+.nav-logo{
+  font-family:'DM Mono',monospace;font-size:13px;
+  color:var(--t1);letter-spacing:0.03em;white-space:nowrap;flex-shrink:0;
+}
+.nav-logo .x{color:var(--t3);margin:0 7px;}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap;}
+.np{
+  font-size:12px;font-weight:500;padding:6px 14px;
+  border-radius:100px;border:1px solid var(--bdr);
+  color:var(--t2);background:transparent;
+  text-decoration:none;transition:all 0.15s;white-space:nowrap;
+}
+.np:hover{border-color:var(--bmd);color:var(--t1);}
+.np.cta{background:var(--cf);border-color:var(--cf);color:#fff;}
+.np.cta:hover{opacity:0.85;}
+
+.hamburger{
+  display:none;flex-direction:column;gap:5px;
+  cursor:pointer;background:none;border:none;padding:4px;flex-shrink:0;
+}
+.hamburger span{
+  display:block;width:22px;height:1.5px;
+  background:var(--t1);border-radius:2px;
+  transition:transform 0.3s,opacity 0.3s;
+}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+.mob-menu{
+  display:none;position:fixed;inset:0;top:58px;
+  background:var(--bg);z-index:190;
+  flex-direction:column;padding:32px 5vw;gap:0;
+  border-top:1px solid var(--bdr);
+}
+.mob-menu.open{display:flex;}
+.mob-menu a{
+  display:block;font-size:20px;
+  font-family:'Syne',sans-serif;font-weight:700;
+  color:var(--t1);text-decoration:none;
+  padding:18px 0;border-bottom:1px solid var(--bdr);
+  letter-spacing:-0.015em;
+}
+.mob-menu a:last-child{border-bottom:none;}
+.mob-menu a.cta-mob{color:var(--cft);}
+
+@media(max-width:760px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+}
+
+/* ── WRAP + SECTION ── */
+.wrap{max-width:1140px;margin:0 auto;padding:0 5vw;}
+section{padding:80px 0;border-bottom:1px solid var(--bdr);}
+
+/* ── COVER ── */
+.cover{
+  padding:108px 5vw 88px;max-width:1140px;margin:0 auto;
+  position:relative;overflow:hidden;
+  border-bottom:1px solid var(--bdr);
+}
+.cover::after{
+  content:'';position:absolute;top:-160px;right:-120px;
+  width:600px;height:600px;
+  background:radial-gradient(circle,var(--cfglow) 0%,transparent 65%);
+  pointer-events:none;
+}
+.c-label{
+  font-family:'DM Mono',monospace;font-size:11px;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--t3);margin-bottom:30px;display:block;
+}
+.c-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(42px,8vw,94px);
+  font-weight:800;line-height:0.92;letter-spacing:-0.038em;
+  color:var(--t1);margin-bottom:28px;position:relative;z-index:1;
+}
+.c-title .ghost{
+  color:transparent;
+  -webkit-text-stroke:1.5px rgba(255,255,255,0.14);
+}
+.c-title .green{color:var(--cf);}
+.c-sub{
+  font-size:clamp(15px,1.8vw,19px);color:var(--t2);
+  line-height:1.78;max-width:620px;margin-bottom:40px;
+  font-weight:300;position:relative;z-index:1;
+}
+.c-sub strong{color:var(--t1);font-weight:500;}
+.c-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--cfdim);border:1px solid rgba(0,195,137,0.25);
+  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--cft);
+  padding:10px 20px;border-radius:6px;margin-bottom:60px;
+  position:relative;z-index:1;
+}
+.c-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--cf);flex-shrink:0;}
+.c-footer{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  padding-top:28px;border-top:1px solid var(--bdr);
+  flex-wrap:wrap;gap:20px;
+}
+.c-info{font-size:14px;color:var(--t2);line-height:1.9;}
+.c-info strong{display:block;font-size:15px;color:var(--t1);font-weight:500;margin-bottom:2px;}
+.c-toc{display:flex;flex-direction:column;align-items:flex-end;gap:0;}
+.toc-link{
+  font-size:12px;color:var(--t3);line-height:2.2;
+  padding-right:14px;border-right:2px solid var(--cf);
+  text-decoration:none;transition:color 0.15s;
+  font-family:'DM Mono',monospace;letter-spacing:0.04em;
+}
+.toc-link:hover{color:var(--t2);}
+
+/* ── SECTION HEADER ── */
+.sec-ey{display:flex;align-items:center;gap:12px;margin-bottom:36px;}
+.sec-num{
+  font-family:'DM Mono',monospace;font-size:11px;font-weight:500;
+  letter-spacing:0.1em;color:var(--cft);
+  background:var(--cfdim);border:1px solid rgba(0,195,137,0.2);
+  border-radius:100px;padding:3px 12px;white-space:nowrap;
+}
+.sec-nm{
+  font-size:11px;font-weight:500;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--t3);
+}
+
+/* ── AUDIT ── */
+.ashell{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--radius-lg);overflow:hidden;}
+.ahdr{
+  padding:24px 30px 20px;border-bottom:1px solid var(--bdr);
+  background:var(--bg3);
+  display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:14px;
+}
+.ahdr h3{
+  font-family:'Syne',sans-serif;font-size:18px;font-weight:700;
+  letter-spacing:-0.02em;color:var(--t1);margin-bottom:4px;
+}
+.ahdr p{font-size:13px;color:var(--t3);font-family:'DM Mono',monospace;}
+.tabrow{
+  display:flex;gap:3px;background:var(--bg4);
+  border:1px solid var(--bdr);border-radius:8px;padding:3px;
+  flex-shrink:0;
+}
+.tbtn{
+  font-family:'DM Mono',monospace;font-size:11px;
+  padding:6px 13px;border:none;background:transparent;
+  color:var(--t2);cursor:pointer;border-radius:6px;
+  transition:all 0.18s;letter-spacing:0.04em;white-space:nowrap;
+}
+.tbtn.on{
+  background:var(--bg2);color:var(--cft);
+  border:1px solid rgba(0,195,137,0.22);
+  box-shadow:0 1px 4px rgba(0,0,0,0.3);
+}
+.abody{padding:28px 30px;}
+.apanel{display:none;}
+.apanel.on{display:block;}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
+@media(max-width:600px){.cgrid{grid-template-columns:1fr;}}
+.mbox{border-radius:var(--radius);padding:20px 22px;}
+.mbox.before{background:var(--rddim);border:1px solid rgba(224,80,80,0.15);}
+.mbox.after{background:var(--cfdim);border:1px solid rgba(0,195,137,0.18);}
+.mbox-lbl{
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;
+}
+.mbox.before .mbox-lbl{color:var(--rdt);}
+.mbox.after  .mbox-lbl{color:var(--cft);}
+.mbox p{font-size:14px;line-height:1.72;color:var(--t2);font-weight:300;}
+.mbox p strong{color:var(--t1);font-weight:500;}
+.mbox p em{font-style:italic;color:var(--t1);}
+.insight{
+  background:var(--bg3);border-left:3px solid var(--cf);
+  border-radius:0 12px 12px 0;padding:14px 18px;
+  font-size:14px;color:var(--t2);line-height:1.72;font-weight:300;
+}
+.insight strong{color:var(--t1);font-weight:500;}
+
+/* ── GTM BRIEF ── */
+.gshell{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--radius-lg);overflow:hidden;}
+.ghdr{
+  padding:28px 30px 24px;background:var(--bg3);border-bottom:1px solid var(--bdr);
+  display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:14px;
+}
+.ghdr h3{
+  font-family:'Syne',sans-serif;font-size:18px;font-weight:700;
+  letter-spacing:-0.02em;color:var(--t1);margin-bottom:4px;
+}
+.ghdr p{font-size:13px;color:var(--t3);font-family:'DM Mono',monospace;}
+.fbadge{
+  font-family:'DM Mono',monospace;font-size:10px;
+  color:var(--cft);border:1px solid rgba(0,195,137,0.22);
+  background:var(--cfdim);border-radius:4px;
+  padding:5px 12px;white-space:nowrap;letter-spacing:0.08em;text-transform:uppercase;
+}
+.gbody{display:grid;grid-template-columns:1fr 1fr;}
+@media(max-width:680px){.gbody{grid-template-columns:1fr;}}
+.gcell{
+  padding:24px 28px;border-right:1px solid var(--bdr);border-bottom:1px solid var(--bdr);
+}
+.gcell:nth-child(even){border-right:none;}
+.gcell.full{grid-column:1/-1;border-right:none;}
+.gcell h4{
+  font-family:'DM Mono',monospace;font-size:10px;
+  color:var(--cft);letter-spacing:0.12em;text-transform:uppercase;
+  margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--bdr);
+}
+.gcell p{font-size:14px;color:var(--t2);line-height:1.75;margin-bottom:8px;font-weight:300;}
+.gcell p:last-child{margin-bottom:0;}
+.gcell p strong{color:var(--t1);font-weight:500;}
+.gcell p em{font-style:italic;}
+.tl{display:flex;flex-direction:column;margin-top:14px;}
+.tlrow{
+  display:grid;grid-template-columns:88px 1fr;
+  gap:16px;padding:14px 0;border-bottom:1px solid var(--bdr);align-items:flex-start;
+}
+.tlrow:last-child{border-bottom:none;}
+.tlwk{
+  font-family:'DM Mono',monospace;font-size:10px;
+  color:var(--cft);text-transform:uppercase;letter-spacing:0.08em;padding-top:3px;
+}
+.tltxt{font-size:14px;color:var(--t2);line-height:1.68;font-weight:300;}
+.tltxt strong{color:var(--t1);font-weight:500;}
+.krow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px;}
+@media(max-width:520px){.krow{grid-template-columns:1fr 1fr;}}
+.kpi{background:var(--bg3);border:1px solid var(--bdr);border-radius:12px;padding:14px 16px;}
+.kpi-l{
+  font-family:'DM Mono',monospace;font-size:10px;color:var(--t3);
+  text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;
+}
+.kpi-v{
+  font-family:'Syne',sans-serif;font-size:22px;font-weight:700;
+  color:var(--cf);line-height:1;margin-bottom:5px;
+}
+.kpi-d{font-size:12px;color:var(--t3);line-height:1.5;}
+
+/* ── SEGMENTS ── */
+.pintro{
+  font-size:16px;color:var(--t2);font-weight:300;line-height:1.75;
+  max-width:700px;margin-bottom:32px;
+}
+.pintro strong{color:var(--t1);font-weight:500;}
+.ptabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
+@media(max-width:580px){.ptabs{grid-template-columns:1fr;}}
+.ptab{
+  background:var(--bg2);border:1px solid var(--bdr);
+  border-radius:var(--radius);padding:20px;cursor:pointer;
+  transition:all 0.2s;user-select:none;
+}
+.ptab:hover{border-color:var(--bmd);}
+.ptab.on{border-color:var(--cf);background:var(--cfdim);box-shadow:0 0 0 1px rgba(0,195,137,0.3);}
+.pt-icon{font-size:22px;display:block;margin-bottom:10px;}
+.pt-name{
+  font-family:'Syne',sans-serif;font-size:14px;font-weight:700;
+  color:var(--t1);margin-bottom:5px;letter-spacing:-0.01em;
+}
+.pt-desc{font-size:13px;color:var(--t2);line-height:1.55;font-weight:300;}
+.p-prompt{
+  background:var(--bg2);border:1px solid var(--bdr);
+  border-radius:var(--radius-lg);padding:20px 24px;text-align:center;
+  font-size:14px;color:var(--t3);font-style:italic;
+}
+.p-output{
+  background:var(--bg2);border:1px solid var(--bdr);
+  border-radius:var(--radius-lg);padding:28px 30px;display:none;
+}
+.p-output.on{display:block;}
+.p-otag{
+  font-family:'DM Mono',monospace;font-size:10px;
+  color:var(--cft);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:14px;
+}
+.p-ohed{
+  font-family:'Syne',sans-serif;font-size:clamp(18px,2.5vw,27px);
+  font-weight:700;color:var(--t1);line-height:1.15;
+  letter-spacing:-0.025em;margin-bottom:12px;
+}
+.p-obody{font-size:15px;color:var(--t2);line-height:1.78;font-weight:300;}
+.p-obody strong{color:var(--t1);font-weight:500;}
+
+/* ── COPY SAMPLES ── */
+.cipintro{
+  font-size:16px;color:var(--t2);font-weight:300;line-height:1.75;
+  max-width:700px;margin-bottom:32px;
+}
+.cipintro strong{color:var(--t1);font-weight:500;}
+.cex{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:14px;}
+.cex-top{
+  padding:16px 24px;background:var(--bg3);border-bottom:1px solid var(--bdr);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+}
+.cex-ch{font-family:'DM Mono',monospace;font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:0.1em;}
+.cbadge{
+  font-family:'DM Mono',monospace;font-size:10px;
+  padding:3px 10px;border-radius:100px;letter-spacing:0.06em;
+}
+.cbadge.web{background:var(--cfdim);color:var(--cft);border:1px solid rgba(0,195,137,0.2);}
+.cbadge.email{background:var(--adim);color:var(--at);border:1px solid rgba(240,165,0,0.2);}
+.cbadge.sales{background:var(--rddim);color:var(--rdt);border:1px solid rgba(224,80,80,0.2);}
+.cbadge.inapp{background:rgba(139,92,246,0.1);color:#a78bfa;border:1px solid rgba(139,92,246,0.2);}
+.cex-body{padding:26px 28px;}
+.ched{
+  font-family:'Syne',sans-serif;font-size:clamp(17px,2.5vw,24px);
+  font-weight:700;color:var(--t1);line-height:1.2;
+  letter-spacing:-0.02em;margin-bottom:12px;
+}
+.ctxt{font-size:15px;color:var(--t2);line-height:1.78;font-weight:300;margin-bottom:16px;}
+.cwhy{
+  font-size:13px;color:var(--t3);font-style:italic;
+  line-height:1.65;padding-top:14px;border-top:1px solid var(--bdr);
+}
+.cwhy strong{color:var(--t2);font-style:normal;}
+
+/* ── OTHER WORK ── */
+.wgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+@media(max-width:480px){.wgrid{grid-template-columns:1fr;}}
+.wcard{
+  background:var(--bg2);border:1px solid var(--bdr);
+  border-radius:var(--radius);padding:22px;
+  text-decoration:none;display:flex;flex-direction:column;
+  transition:border-color 0.2s,transform 0.2s;
+}
+.wcard:hover{border-color:rgba(0,195,137,0.35);transform:translateY(-3px);}
+.wcard-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;}
+.wcard h4{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;letter-spacing:-0.01em;color:var(--t1);margin-bottom:7px;line-height:1.25;}
+.wcard p{font-size:13px;color:var(--t2);line-height:1.65;font-weight:300;flex:1;}
+.warr{display:block;font-size:16px;color:var(--t3);margin-top:14px;transition:color 0.2s,transform 0.2s;}
+.wcard:hover .warr{color:var(--cft);transform:translateX(4px);}
+
+/* ── SIGNATURE ── */
+.sig{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:20px;padding:60px 0 80px;
+}
+.sig-name{
+  font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,32px);
+  font-weight:800;letter-spacing:-0.025em;color:var(--t1);margin-bottom:10px;
+}
+.sig-name span{color:var(--cft);}
+.sig-det{font-size:14px;color:var(--t2);line-height:1.9;}
+.sig-det a{color:var(--t2);text-decoration:none;transition:color 0.15s;}
+.sig-det a:hover{color:var(--cft);}
+.sig-btns{display:flex;gap:10px;flex-wrap:wrap;}
+.sbtn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:500;padding:13px 24px;
+  border-radius:8px;text-decoration:none;transition:all 0.18s;
+}
+.sbtn.pri{background:var(--cf);color:#fff;border:1px solid var(--cf);}
+.sbtn.pri:hover{opacity:0.88;transform:translateY(-1px);}
+.sbtn.ghost{background:transparent;color:var(--t2);border:1px solid var(--bmd);}
+.sbtn.ghost:hover{border-color:var(--cf);color:var(--cft);}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity 0.52s ease,transform 0.52s ease;}
+.reveal.in{opacity:1;transform:none;}
+
+/* ── RESPONSIVE MISC ── */
+@media(max-width:580px){
+  section{padding:56px 0;}
+  .cover{padding:76px 5vw 56px;}
+  .c-footer{flex-direction:column;align-items:flex-start;}
+  .c-toc{align-items:flex-start;}
+  .toc-link{padding-right:0;padding-left:14px;border-right:none;border-left:2px solid var(--cf);}
+  .gbody{grid-template-columns:1fr;}
+  .gcell{border-right:none;}
+  .sig{flex-direction:column;align-items:flex-start;padding:48px 0 64px;}
+  .ahdr{flex-direction:column;}
+  .tabrow{width:100%;}
+  .tbtn{flex:1;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="rbar" id="rbar"></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-i">
+    <div class="nav-logo">Bhanu Kumar<span class="x">&#215;</span>Cashfree</div>
+    <div class="nav-links">
+      <a href="#audit"    class="np">Messaging Audit</a>
+      <a href="#gtm"      class="np">GTM Brief</a>
+      <a href="#segments" class="np">Segment Map</a>
+      <a href="#copy"     class="np">Copy</a>
+      <a href="#work"     class="np">Other Work</a>
+      <a href="mailto:bhanukumar0902@gmail.com" class="np cta">Say hello</a>
+    </div>
+    <button class="hamburger" id="hbg" onclick="toggleMob()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mob-menu" id="mob">
+  <a href="#audit"    onclick="closeMob()">Messaging Audit</a>
+  <a href="#gtm"      onclick="closeMob()">GTM Brief</a>
+  <a href="#segments" onclick="closeMob()">Segment Map</a>
+  <a href="#copy"     onclick="closeMob()">Copy</a>
+  <a href="#work"     onclick="closeMob()">Other Work</a>
+  <a href="mailto:bhanukumar0902@gmail.com" class="cta-mob">Say hello &#8594;</a>
+</div>
+
+<!-- COVER -->
+<div class="cover reveal">
+  <span class="c-label">Proof of Work &nbsp;&#183;&nbsp; Manager, Product Marketing (Cross Border) &nbsp;&#183;&nbsp; Cashfree Payments</span>
+  <h1 class="c-title">
+    Indian businesses<br>
+    are going global.<br>
+    <span class="ghost">The story</span><br>
+    <span class="green">isn't keeping up.</span>
+  </h1>
+  <p class="c-sub">
+    Cashfree just became <strong>the first Indian fintech to support 140+ currencies</strong> on its International Payment Gateway, raised $53M to push hard on cross-border, and holds one of the earliest RBI PA-CB licenses in the country. The infrastructure is genuinely ahead. The gap is in how the exports story reaches the SaaS founder in Pune, the D2C brand in Surat, or the freelance developer in Hyderabad who's still using PayPal because nobody explained what else exists. This PoW is built around closing that gap.
+  </p>
+  <div class="c-tag">
+    <span class="c-tag-dot"></span>
+    Messaging Audit &nbsp;&#183;&nbsp; GTM Brief &nbsp;&#183;&nbsp; Segment Copy
+  </div>
+  <div class="c-footer">
+    <div class="c-info">
+      <strong>Bhanu Kumar</strong>
+      bhanukumar0902@gmail.com &nbsp;&#183;&nbsp; linkedin.com/in/bhanuexcalibur<br>
+      Applying for: Manager, Product Marketing (Cross Border) &nbsp;&#183;&nbsp; May 2026
+    </div>
+    <div class="c-toc">
+      <a href="#audit"    class="toc-link">01 &nbsp; Messaging Audit</a>
+      <a href="#gtm"      class="toc-link">02 &nbsp; GTM Brief</a>
+      <a href="#segments" class="toc-link">03 &nbsp; Segment Map</a>
+      <a href="#copy"     class="toc-link">04 &nbsp; Copy Samples</a>
+      <a href="#work"     class="toc-link">05 &nbsp; Other Relevant Work</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- 01 MESSAGING AUDIT -->
+<section id="audit">
+  <div class="wrap">
+    <div class="sec-ey reveal">
+      <span class="sec-num">Part 01</span>
+      <span class="sec-nm">Messaging Audit</span>
+    </div>
+    <div class="ashell reveal">
+      <div class="ahdr">
+        <div>
+          <h3>cashfree.com/cross-border &nbsp;&#183;&nbsp; Where the current story leaves gaps</h3>
+          <p>Three surfaces where the exports messaging could work harder for the exporter actually reading it</p>
+        </div>
+        <div class="tabrow">
+          <button class="tbtn on" onclick="swTab('hero',this)">Homepage</button>
+          <button class="tbtn"    onclick="swTab('value',this)">Value Props</button>
+          <button class="tbtn"    onclick="swTab('comp',this)">Competitive Gap</button>
+        </div>
+      </div>
+      <div class="abody">
+
+        <!-- TAB 1: HOMEPAGE -->
+        <div class="apanel on" id="ap-hero">
+          <div class="cgrid">
+            <div class="mbox before">
+              <div class="mbox-lbl">&#10005; What's there now</div>
+              <p>The cross-border page leads with product categories: "Global Collections," "International Payment Gateway," and feature bullets around currencies and settlement timelines. It reads like a spec sheet. A SaaS founder landing here after Googling "how to get paid from US clients India" has to do a lot of work to understand which product is even relevant to them, and whether Cashfree is significantly different from what they're already using.</p>
+            </div>
+            <div class="mbox after">
+              <div class="mbox-lbl">&#10003; Where it could go</div>
+              <p>Lead with the situation the exporter is already in. Something like: <em>"Your US client just asked for an invoice. You're about to send your PayPal link. There's a better way."</em> That single line does more to qualify the reader and create urgency than four feature bullets about settlement rails. <strong>The product detail follows once the exporter feels seen.</strong></p>
+            </div>
+          </div>
+          <div class="insight">
+            <strong>The core issue:</strong> The current page assumes the reader already knows they need a cross-border payments product and is evaluating features. Most of Cashfree's target exporters are still in the "I don't know there's something better" stage. Starting with their situation rather than the product's capabilities changes the entire conversion dynamic.
+          </div>
+        </div>
+
+        <!-- TAB 2: VALUE PROPS -->
+        <div class="apanel" id="ap-value">
+          <div class="cgrid">
+            <div class="mbox before">
+              <div class="mbox-lbl">&#10005; Current framing</div>
+              <p>"Collect payments in 15+ foreign currencies. Auto-generate e-FIRA within 24 hours. T+1 to T+2 settlement." These are accurate, useful facts. But they're aimed at someone who already speaks the language: a finance executive or compliance officer, not the SaaS founder who doesn't know what FIRA stands for and isn't sure if they even need one.</p>
+            </div>
+            <div class="mbox after">
+              <div class="mbox-lbl">&#10003; Rewrite for the actual user</div>
+              <p>"Every payment you receive from an international client automatically comes with the compliance document your CA needs at tax time. You don't have to track it down, request it, or explain to anyone what it is." <strong>Same feature, completely different register.</strong> The exporter reading this understands why it matters without knowing what an e-FIRA is.</p>
+            </div>
+          </div>
+          <div class="insight">
+            <strong>The translation problem:</strong> Cashfree's cross-border product has genuinely useful compliance automation built in. The gap is that the copy assumes familiarity with the compliance requirements. Translating those features into the actual day-to-day relief they provide unlocks a much larger addressable audience, specifically the mid-market businesses and D2C founders who haven't had a finance team educate them on what they even need.
+          </div>
+        </div>
+
+        <!-- TAB 3: COMPETITIVE GAP -->
+        <div class="apanel" id="ap-comp">
+          <div class="cgrid">
+            <div class="mbox before">
+              <div class="mbox-lbl">&#10005; The problem Cashfree doesn't yet name</div>
+              <p>Competitors like Skydo and Xflow have built their entire brand around "purpose-built for exporters." Their messaging is tight: zero FX markup, instant FIRA, built only for international payments. Cashfree's cross-border positioning is harder to land because it's part of a broader product, and the current messaging doesn't explain why that's actually an advantage for the exporter.</p>
+            </div>
+            <div class="mbox after">
+              <div class="mbox-lbl">&#10003; The real differentiator worth owning</div>
+              <p>Cashfree is the only player that handles <em>both</em> the international receipt and everything that happens inside India: payroll, vendor payments, tax disbursals, all in one place. <strong>"Collect globally. Run everything else through the same account."</strong> That's a genuine advantage for a growing business that no export-only player can match. It's just not being said yet.</p>
+            </div>
+          </div>
+          <div class="insight">
+            <strong>The positioning opportunity:</strong> Rather than competing with Skydo on "who's more purpose-built for exports," Cashfree wins by reframing the category. Export-only tools solve one problem and create a new one: you now have a separate platform for international collections that doesn't talk to your domestic stack. Cashfree is the only option where global and domestic operations live in the same place. That's the story worth telling, and it's not being told right now.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 02 GTM BRIEF -->
+<section id="gtm">
+  <div class="wrap">
+    <div class="sec-ey reveal">
+      <span class="sec-num">Part 02</span>
+      <span class="sec-nm">GTM Brief</span>
+    </div>
+    <div class="gshell reveal">
+      <div class="ghdr">
+        <div>
+          <h3>Export Segment GTM &nbsp;&#183;&nbsp; 90-Day Launch Brief</h3>
+          <p>How I'd build the motion for Indian exporters: SaaS, D2C, freelancers, mid-market</p>
+        </div>
+        <span class="fbadge">Q3 2026 Draft</span>
+      </div>
+      <div class="gbody">
+
+        <div class="gcell">
+          <h4>The Opportunity</h4>
+          <p>India's service exports crossed $330B last year. The businesses doing that exporting are mostly using PayPal, wire transfers through their bank, or export-only niche tools like Skydo. <strong>None of them know that Cashfree now gives them virtual accounts in USD, EUR, GBP, CAD, and AUD, settling in INR at live FX rates, with auto-generated FIRA per payment.</strong></p>
+          <p>The PA-CB license, the $53M raise, and the 140+ currency upgrade from May 2025 are all proof points that Cashfree is serious about this segment. The product is ready. The market doesn't know that yet.</p>
+        </div>
+
+        <div class="gcell">
+          <h4>Why Now</h4>
+          <p>Three things have shifted in the last 12 months that make this the right window. The RBI PA-CB framework has matured: more businesses now understand they need a licensed aggregator and not just any payment link. Competitors have grown the awareness of the category without owning it. And Cashfree's recent 140+ currency announcement gives us a tangible, first-of-its-kind claim to lead with.</p>
+          <p><strong>We're not creating a new category. We're winning a category that's already forming around us.</strong></p>
+        </div>
+
+        <div class="gcell">
+          <h4>Core Message</h4>
+          <p>You're already doing global business. Your payment setup shouldn't make you feel like you're not. Cashfree gives Indian exporters virtual accounts in the currencies their clients use, so you get paid the way your client is comfortable paying, without the wire transfer fees, the PayPal percentage, or the three-day wait to know if the money actually arrived.</p>
+          <p><strong>Everything that happens after the money lands, from vendor payouts to salaries to tax payments, runs in the same account.</strong> That's what makes Cashfree different from every export-only alternative.</p>
+        </div>
+
+        <div class="gcell">
+          <h4>Channel Mix</h4>
+          <p><strong>LinkedIn:</strong> Founders and finance leads at Indian SaaS and D2C companies. Content focused on the real cost of PayPal, the FIRA pain point, and the "both domestic and global in one place" angle.</p>
+          <p><strong>Communities:</strong> SaaSBoomi, D2C Insider, IndiaHacks, IndiaMART. These are where the actual target customer is having conversations about scaling internationally.</p>
+          <p><strong>Partnerships:</strong> CAs and GST consultants who actively field questions about international payment compliance. They're already trusted advisors to the exporter and have every incentive to recommend a cleaner collection process.</p>
+        </div>
+
+        <div class="gcell full">
+          <h4>30-60-90 Execution</h4>
+          <div class="tl">
+            <div class="tlrow">
+              <span class="tlwk">Days 1-30</span>
+              <span class="tltxt"><strong>Foundational work.</strong> Audit all existing cross-border pages and sales materials. Interview 5-8 current cross-border customers to understand how they found us, what they expected, and where the first confusion point is. Build the messaging framework with three buyer registers: SaaS founder, D2C brand, freelancer/consultant. Align sales on the new "global plus domestic" positioning before it goes live anywhere external.</span>
+            </div>
+            <div class="tlrow">
+              <span class="tlwk">Days 31-60</span>
+              <span class="tltxt"><strong>Launch assets.</strong> Rewrite the cross-border landing page based on new positioning. Build a comparison one-pager (Cashfree vs. export-only alternatives) for sales. Launch the first LinkedIn content series with a mix of educational content on e-FIRA, SWIFT costs, and FX markup, written from the exporter's perspective. Start community seeding in SaaSBoomi and D2C Insider forums.</span>
+            </div>
+            <div class="tlrow">
+              <span class="tlwk">Days 61-90</span>
+              <span class="tltxt"><strong>Amplify and measure.</strong> Run a paid campaign targeting founders and finance leads at companies with international revenue signals (job postings mentioning overseas clients, LinkedIn about sections with global markets). Host one webinar with a CA partner on "how Indian exporters should actually structure their international collections for tax time." Track pipeline contribution, not just top-of-funnel metrics.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="gcell full" style="border-bottom:none;">
+          <h4>How We'll Know It's Working</h4>
+          <div class="krow">
+            <div class="kpi">
+              <div class="kpi-l">Primary</div>
+              <div class="kpi-v">Cross-border merchant activations</div>
+              <div class="kpi-d">New exporters going live with Global Collections or IPG each month</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-l">Secondary</div>
+              <div class="kpi-v">Pipeline from PMM channels</div>
+              <div class="kpi-d">Inbound leads attributable to content and campaigns, tracked through CRM</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-l">Qualitative</div>
+              <div class="kpi-v">Sales conversation quality</div>
+              <div class="kpi-d">Are reps hearing objections we haven't already answered in the collateral?</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 03 SEGMENT MAP -->
+<section id="segments">
+  <div class="wrap">
+    <div class="sec-ey reveal">
+      <span class="sec-num">Part 03</span>
+      <span class="sec-nm">Segment Map</span>
+    </div>
+    <p class="pintro reveal">
+      The exporter audience isn't one person. A freelance developer getting paid by a US client, a D2C founder trying to sell kurtis to buyers in the UK, and a mid-market SaaS company billing enterprise clients in Europe all have the same infrastructure problem but <strong>completely different emotional entry points.</strong> Click a segment to see how the message shifts.
+    </p>
+    <div class="ptabs reveal">
+      <div class="ptab" onclick="swSeg('saas',this)">
+        <span class="pt-icon">&#128187;</span>
+        <div class="pt-name">Indian SaaS Founder</div>
+        <div class="pt-desc">Billing US or EU clients monthly. Stripe often unavailable. PayPal eating 4-5%. Compliance a recurring headache.</div>
+      </div>
+      <div class="ptab" onclick="swSeg('d2c',this)">
+        <span class="pt-icon">&#128218;</span>
+        <div class="pt-name">D2C Brand Owner</div>
+        <div class="pt-desc">Selling Indian products internationally via own website or global marketplaces. Card failures, FX confusion, no clean settlement story.</div>
+      </div>
+      <div class="ptab" onclick="swSeg('freelancer',this)">
+        <span class="pt-icon">&#128188;</span>
+        <div class="pt-name">Freelancer / Agency</div>
+        <div class="pt-desc">Raising invoices to overseas clients. PayPal or Wise as default. FIRA for tax compliance. Wire transfer costs hitting margins.</div>
+      </div>
+    </div>
+    <div class="p-prompt reveal" id="p-prompt">Pick a segment above to see how the messaging changes for that buyer.</div>
+    <div class="p-output reveal" id="p-output">
+      <div class="p-otag" id="p-tag"></div>
+      <div class="p-ohed" id="p-hed"></div>
+      <div class="p-obody" id="p-body"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 04 COPY SAMPLES -->
+<section id="copy">
+  <div class="wrap">
+    <div class="sec-ey reveal">
+      <span class="sec-num">Part 04</span>
+      <span class="sec-nm">Copy Samples</span>
+    </div>
+    <p class="cipintro reveal">
+      Four pieces of actual copy across different channels, written for the export buyer. These aren't templates. Each one is written for a specific moment in the journey where the exporter is making a real decision, and each one is trying to earn the next step rather than just describe the product.
+    </p>
+
+    <!-- COPY 1: Landing page hero -->
+    <div class="cex reveal">
+      <div class="cex-top">
+        <span class="cex-ch">Landing page &mdash; Global Collections hero</span>
+        <span class="cbadge web">Web</span>
+      </div>
+      <div class="cex-body">
+        <div class="ched">Your US client pays you like a local vendor. You get paid in INR by tomorrow.</div>
+        <div class="ctxt">When you share your Cashfree Global Collections account details, your client in New York pays via ACH. Your client in London pays via Faster Payments. They're paying into a local account, in a currency they know, through a method they already use. The money converts to INR at live exchange rates and lands in your Indian bank account. Every payment comes with an e-FIRA, automatically, so your CA doesn't need to ask for it at the end of the quarter. No wire transfer. No 3-5% PayPal cut. No chasing confirmation emails for three days.</div>
+        <div class="cwhy"><strong>Why it works:</strong> Starts from the client's experience, not the product feature, because the exporter cares most about whether their client finds it easy. Explains the mechanism in plain language. Ends by naming the three actual pain points in reverse order of how they usually get discovered: cost last, friction first. The e-FIRA line treats the reader like someone who knows what this is without explaining it.</div>
+      </div>
+    </div>
+
+    <!-- COPY 2: LinkedIn post -->
+    <div class="cex reveal">
+      <div class="cex-top">
+        <span class="cex-ch">LinkedIn &mdash; Organic content post</span>
+        <span class="cbadge inapp">Social</span>
+      </div>
+      <div class="cex-body">
+        <div class="ched">The hidden cost of using PayPal for international invoices (that most founders don't calculate until year 3)</div>
+        <div class="ctxt">Say you're billing $8,000/month in international revenue through PayPal. The standard 4.4% international transaction fee means you're leaving roughly $352/month on the table. That's around Rs 29,000 every month. Rs 3.5 lakh a year. That's one good senior hire, or one quarter of runway, depending on where you are. Now add the fact that PayPal settlements can take 3-5 business days, you don't get a per-transaction FIRA automatically, and your US client has to fund their PayPal account instead of just paying from their bank. At a certain revenue point, the math just stops making sense. Worth knowing what your actual options are before you scale another vertical that runs on the same stack.</div>
+        <div class="cwhy"><strong>Why it works:</strong> The hook works because "year 3" implies the reader has been missing this for a while, which is more uncomfortable than just saying "you're paying too much." The math is specific enough to feel real without being abstract, and it's tied to something the reader can visualise (a hire, runway). Doesn't pitch Cashfree explicitly. Ends by opening the door for the reader to explore without demanding it.</div>
+      </div>
+    </div>
+
+    <!-- COPY 3: Sales one-pager intro -->
+    <div class="cex reveal">
+      <div class="cex-top">
+        <span class="cex-ch">Sales enablement &mdash; Battle card opening (vs. export-only tools)</span>
+        <span class="cbadge sales">Sales</span>
+      </div>
+      <div class="cex-body">
+        <div class="ched">When the prospect says: "We're already using Skydo / Xflow for international payments."</div>
+        <div class="ctxt">Don't argue with the choice. Validate it, then ask one question: "That makes sense. Those tools are built specifically for export collections and they do that well. The question we usually hear once a business scales past a certain point is: what do you use for everything that happens after the international payment lands? Your vendor disbursals, payroll, domestic payouts, all of that. Are those in a separate system right now?" If the answer is yes, the conversation moves naturally. Export-only tools are great at one thing and require a separate stack for everything else. Cashfree is the only account where global collections and domestic operations live in the same place.</div>
+        <div class="cwhy"><strong>Why it works:</strong> The instinct when a prospect names a competitor is to list your advantages. That triggers defensiveness. This card tells the rep to agree with the choice first, which earns trust, then opens a different gap entirely. The question is about their domestic stack, not about the competitor's weaknesses. It reframes the conversation from "which international tool is better" to "is one tool actually enough," which is a question Cashfree uniquely wins.</div>
+      </div>
+    </div>
+
+    <!-- COPY 4: Email -->
+    <div class="cex reveal">
+      <div class="cex-top">
+        <span class="cex-ch">Email &mdash; Webinar follow-up, attended but didn't sign up</span>
+        <span class="cbadge email">Email</span>
+      </div>
+      <div class="cex-body">
+        <div class="ched">One thing most of our webinar attendees do in the next 48 hours</div>
+        <div class="ctxt">Hey [First name], you were at our session on cross-border collections for Indian exporters last week. A lot of the questions that came in during Q&amp;A were about the same thing: compliance documentation. Specifically, what you're supposed to have per payment for your CA, and whether the tools people are currently using are actually generating it correctly. We put together a quick one-pager that answers the four most common questions from that session, including what an e-FIRA is, when you actually need it, and what happens if you don't have one per transaction at year-end. It's in the link below. Takes about 4 minutes to read. If it raises questions specific to your setup, I'm happy to do a 15-minute call.</div>
+        <div class="cwhy"><strong>Why it works:</strong> Doesn't lead with "thanks for attending" or pitch the product. Opens with a behaviour that positions the reader as someone who's already thinking about this problem. The e-FIRA focus is specific enough to be useful to someone who attended, so it rewards attention. The CTA is low-commitment and framed as a service, not a sales call.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- 05 OTHER WORK -->
+<section id="work" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="sec-ey reveal">
+      <span class="sec-num">Part 05</span>
+      <span class="sec-nm">Other Relevant Work</span>
+    </div>
+    <div class="wgrid reveal">
+      <a href="https://bhanuexcalibur.github.io/RevPoints_Audit/" class="wcard" target="_blank" rel="noopener">
+        <div class="wcard-tag">Growth audit &nbsp;&#183;&nbsp; Fintech / Loyalty</div>
+        <h4>Revolut RevPoints &mdash; Growth Audit</h4>
+        <p>A full audit of RevPoints' 53M dormant user problem. Includes an interactive activation calculator, competitive benchmark, and a 30-60-90 day reactivation plan. Closest in methodology to how I'd approach a cross-border segment audit for Cashfree.</p>
+        <span class="warr">&#8594;</span>
+      </a>
+      <a href="https://bhanuexcalibur.github.io/Revolut-Used-Gone-Campaign/" class="wcard" target="_blank" rel="noopener">
+        <div class="wcard-tag">Campaign strategy &nbsp;&#183;&nbsp; Consumer fintech</div>
+        <h4>Revolut &mdash; Used, Gone Campaign</h4>
+        <p>Full creative platform for Revolut's virtual single-use cards. Positioning, moodboard, in-product moment, and a breach-reactive OOH activation. Shows how I move from a single product insight all the way through to cross-channel execution.</p>
+        <span class="warr">&#8594;</span>
+      </a>
+      <a href="https://bhanuexcalibur.github.io/Altitude_LandingPage/" class="wcard" target="_blank" rel="noopener">
+        <div class="wcard-tag">Landing page &nbsp;&#183;&nbsp; Fintech infra</div>
+        <h4>Altitude &mdash; Stablecoin Business Account</h4>
+        <p>Repositioned landing page for a stablecoin-native business account targeting global founders. The core challenge is the same as Cashfree's export story: making complex financial infrastructure feel legible and trustworthy to a business owner who isn't a finance expert.</p>
+        <span class="warr">&#8594;</span>
+      </a>
+      <a href="https://bhanuexcalibur.github.io/RelayFi_PoW/" class="wcard" target="_blank" rel="noopener">
+        <div class="wcard-tag">Full PoW &nbsp;&#183;&nbsp; SMB fintech / Banking</div>
+        <h4>Relay Financial &mdash; Proof of Work</h4>
+        <p>Full product marketing PoW covering a messaging audit, GTM brief, persona mapping, and copy across three buyer types. Similar scope to this page. Relevant because Relay and Cashfree share the same core challenge: one product, multiple audiences, and a trust gap that copy has to close before pricing ever comes up.</p>
+        <span class="warr">&#8594;</span>
+      </a>
+      <a href="https://bhanuexcalibur.github.io/Stripe_PoW/" class="wcard" target="_blank" rel="noopener">
+        <div class="wcard-tag">Full PoW &nbsp;&#183;&nbsp; Payments infra</div>
+        <h4>Stripe &mdash; Proof of Work</h4>
+        <p>Pricing narrative audit, GTM brief, and segment copy for Stripe. Relevant here because payments infrastructure marketing has the same fundamental problem across every player: the product is real, the feature list is long, and the copy has to do the work of making the right person feel like it was built specifically for them.</p>
+        <span class="warr">&#8594;</span>
+      </a>
+      <a href="https://bhanuexcalibur.github.io/Boundless-PoW/" class="wcard" target="_blank" rel="noopener">
+        <div class="wcard-tag">B2B messaging &nbsp;&#183;&nbsp; Compliance infra</div>
+        <h4>Boundless &mdash; Messaging Audit</h4>
+        <p>Three-buyer messaging rewrite for a compliance infrastructure product. One product, three audiences with completely different emotional registers and levels of technical fluency. Directly applicable to how the Cashfree cross-border story needs to work differently for the SaaS founder, the D2C brand, and the finance lead at a mid-market exporter.</p>
+        <span class="warr">&#8594;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- SIGNATURE -->
+<div class="wrap">
+  <div class="sig reveal">
+    <div>
+      <div class="sig-name">Bhanu <span>Kumar</span></div>
+      <div class="sig-det">
+        <a href="mailto:bhanukumar0902@gmail.com">bhanukumar0902@gmail.com</a><br>
+        <a href="https://linkedin.com/in/bhanuexcalibur" target="_blank" rel="noopener">linkedin.com/in/bhanuexcalibur</a> &nbsp;&#183;&nbsp;
+        <a href="https://x.com/excaliburbhanu" target="_blank" rel="noopener">@excaliburbhanu</a>
+      </div>
+    </div>
+    <div class="sig-btns">
+      <a class="sbtn pri" href="mailto:bhanukumar0902@gmail.com">
+        Get in touch
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.5h8M7.5 3.5l3 3-3 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="sbtn ghost" href="https://drive.google.com/file/d/1Z8jYgj38UCwalrtb_AyQfDrmH5P7xzsO/view" target="_blank" rel="noopener">Full resume &#8594;</a>
+    </div>
+  </div>
+</div>
+
+
+<script>
+/* ── NAV TOGGLE ── */
+function toggleMob() {
+  document.getElementById('mob').classList.toggle('open');
+  document.getElementById('hbg').classList.toggle('open');
+}
+function closeMob() {
+  document.getElementById('mob').classList.remove('open');
+  document.getElementById('hbg').classList.remove('open');
+}
+
+/* ── AUDIT TABS ── */
+function swTab(id, btn) {
+  document.querySelectorAll('.apanel').forEach(function(p){ p.classList.remove('on'); });
+  document.querySelectorAll('.tbtn').forEach(function(b){ b.classList.remove('on'); });
+  document.getElementById('ap-' + id).classList.add('on');
+  btn.classList.add('on');
+}
+
+/* ── SEGMENT MESSAGING ── */
+var segs = {
+  saas: {
+    tag:  "Segment: Indian SaaS Founder",
+    hed:  "Stripe doesn't work in India. PayPal costs you 4-5%. There's a third option you probably haven't been shown yet.",
+    body: "You're billing $5K or $20K a month to clients in the US and Europe. The money moves, but slowly and expensively. Stripe's availability in India is limited, so you're either on PayPal and giving up 4-5% on every invoice, or you're doing wire transfers through your bank and waiting 4-7 days to confirm the payment actually cleared. <strong>Cashfree Global Collections gives you actual bank accounts in USD, EUR, and GBP in your business name.</strong> Your client pays by ACH or SEPA the same way they pay any vendor. You get the money in INR in your Indian bank account, at live FX rates, with an e-FIRA per transaction that your CA needs anyway. No percentage going to a payments company's margin. No wire transfer mysteries."
+  },
+  d2c: {
+    tag:  "Segment: D2C Brand Owner",
+    hed:  "Your product is good enough to sell internationally. The payment experience is still making it harder than it should be.",
+    body: "You've cracked domestic. Now you're getting orders from the UK, the UAE, Singapore. Your checkout works, technically, but international card failure rates are higher than they should be, the pricing shows in INR and confuses buyers, and FX charges are coming out of your margin without a clear number you can point to. <strong>Cashfree's International Payment Gateway lets your international customers pay in their own currency, in a checkout experience that doesn't require them to convert anything in their head.</strong> You settle in INR. The 140+ currency support means you're not turning away buyers from markets you didn't specifically build for. And because this is the same Cashfree account you use domestically, your reconciliation isn't split across two platforms."
+  },
+  freelancer: {
+    tag:  "Segment: Freelancer / Independent Consultant",
+    hed:  "You raised the invoice. Now you're waiting three days to know if it actually arrived.",
+    body: "The work is done. The invoice is sent. And now you're doing a thing that every freelancer who gets paid internationally knows too well: refreshing your PayPal balance to see if it cleared, then calculating what 4.4% actually cost you this time. <strong>Cashfree Global Collections gives you a USD or GBP account you can put on an invoice like any other bank detail.</strong> Your client pays from their bank account directly, no PayPal required. You get notified when it lands. The INR shows up in your Indian account by T+2. And you get an e-FIRA automatically for every payment, which you'll need come tax time whether or not you were tracking it before."
+  }
+};
+
+function swSeg(type, card) {
+  document.querySelectorAll('.ptab').forEach(function(c){ c.classList.remove('on'); });
+  card.classList.add('on');
+  var d = segs[type];
+  document.getElementById('p-tag').textContent  = d.tag;
+  document.getElementById('p-hed').textContent  = d.hed;
+  document.getElementById('p-body').innerHTML   = d.body;
+  document.getElementById('p-prompt').style.display = 'none';
+  var out = document.getElementById('p-output');
+  out.classList.add('on');
+  out.style.opacity = '0';
+  out.style.transform = 'translateY(8px)';
+  out.style.transition = 'opacity 0.28s ease, transform 0.28s ease';
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      out.style.opacity = '1';
+      out.style.transform = 'translateY(0)';
+    });
+  });
+}
+
+/* ── READING PROGRESS BAR ── */
+window.addEventListener('scroll', function() {
+  var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  var progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+  document.getElementById('rbar').style.width = progress + '%';
+});
+
+/* ── SCROLL REVEAL ── */
+var revEls = document.querySelectorAll('.reveal');
+
+if ('IntersectionObserver' in window) {
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -10px 0px' });
+  revEls.forEach(function(el){ obs.observe(el); });
+} else {
+  revEls.forEach(function(el){ el.classList.add('in'); });
+}
+
+window.addEventListener('load', function(){
+  revEls.forEach(function(el){
+    var rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 20) el.classList.add('in');
+  });
+});
+setTimeout(function(){
+  revEls.forEach(function(el){
+    var rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 20) el.classList.add('in');
+  });
+}, 400);
+</script>
+</body>
+</html>
